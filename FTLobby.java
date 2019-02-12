@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FTLobby {
     private JFrame frame;
@@ -24,18 +26,28 @@ public class FTLobby {
         panel.add(coords_A);
         panel.add(coords_B);
         panel.add(aircraftCoords);
+        panel.add(btn_GetKML);
         return panel;
     }
 
     public void configureComponents(){
+        // first and second set of coordinates
         coords_A.setBackground(Color.WHITE);
         coords_A.setColumns(15);
 
         coords_B.setBackground(Color.WHITE);
         coords_B.setColumns(15);
 
+        // list of coordinates
         aircraftCoords.setBackground(Color.lightGray);
         aircraftCoords.setColumns(31);
         aircraftCoords.setRows(5);
+
+        // button to create and access a built KML file
+        btn_GetKML.setPreferredSize(new Dimension(342, 40));
+        btn_GetKML.addActionListener(e -> {
+            System.out.println("We'll convert coords using FormatCoordinates class, then build KML " +
+                                "via the BuildKML class.");
+        });
     }
 }
