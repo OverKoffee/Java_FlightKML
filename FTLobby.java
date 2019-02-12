@@ -1,13 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class FTLobby {
     private JFrame frame;
-    private JTextField coords_A = new TextfieldPrompt(1).getTextField();
-    private JTextField coords_B = new TextfieldPrompt(2).getTextField();
-    private JTextArea aircraftCoords = new TextAreaPrompt().getTextArea();
+    private JTextField coords_A = new TextPrompt<JTextField>("Enter first " +
+            "coords...", new JTextField("")).getTextPrompt();
+    private JTextField coords_B = new TextPrompt<JTextField>("Enter second " +
+                                                        "coords...", new JTextField("")).getTextPrompt();
+    private JTextArea aircraftCoords = new TextPrompt<JTextArea>("Enter list " +
+                                                        "list of coords...", new JTextArea("")).getTextPrompt();
     private JButton btn_GetKML = new JButton("Get KML");
 
     public FTLobby(){
