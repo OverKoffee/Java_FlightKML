@@ -3,8 +3,8 @@ import java.awt.*;
 
 public class FTLobby {
     private JFrame frame;
-    private JTextField coords_A = new JTextField("This is my first set of coords.");
-    private JTextField coords_B = new JTextField("This is my second set of coords.");
+    private JTextField coords_A = new TextfieldPrompt(1).getTextField();
+    private JTextField coords_B = new TextfieldPrompt(2).getTextField();
     private JTextArea aircraftCoords = new JTextArea("This is my textarea.", 5, 31);
     private JButton btn_GetKML = new JButton("Get KML");
 

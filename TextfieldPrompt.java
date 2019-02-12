@@ -47,4 +47,8 @@ public class TextfieldPrompt {
 
         });
     }
+
+    public JTextField getTextField(){
+        return textField;
+    }
 }
