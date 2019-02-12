@@ -21,6 +21,7 @@ public class TextfieldPrompt {
         promptFont = new Font("promptFont", 2, 12); // italics and plain
         inputFont = new Font("inputFont",1,12); // bold and plain
 
+        // set the prompt text string
         if (whichCoords == 1)
             promptText = "Enter first coords...";
         else if (whichCoords == 2)
@@ -33,19 +34,32 @@ public class TextfieldPrompt {
         // text in the textfield
         textField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
-                if (textField.getText() == "" || textField.getText() == promptText){
-                    textField.setText("");
-                    textField.setFont(inputFont);
-                }
+                validateFocusGained();
             }
             public void focusLost(FocusEvent e) {
-                if (textField.getText() == "" || textField.getText() == promptText){
-                    textField.setText(promptText);
-                    textField.setFont(promptFont);
-                }
+                validateFocusLost();
             }
-
         });
+    }
+
+    public void validateFocusGained(){
+        if ((textField.getText().equals("")) || (textField.getText().equals(promptText))){
+            textField.setFont(inputFont);
+            textField.setText("");
+        }
+        else {
+            textField.setFont(inputFont);
+        }
+    }
+
+    public void validateFocusLost(){
+        if ((textField.getText().equals("")) || (textField.getText().equals(promptText))){
+            textField.setFont(promptFont);
+            textField.setText(promptText);
+        }
+        else {
+            textField.setFont(inputFont);
+        }
     }
 
     public JTextField getTextField(){
