@@ -1,5 +1,5 @@
 /*
-Class created by Redmal on 2/11/2019.
+Class updated by Redmal on 2/23/2019.
 
 This class will take a formatted list of
 coordinates and build a KML file that
@@ -8,13 +8,19 @@ a user may load in a mapping application
 representation of a flight path.
  */
 
+
 public class BuildKML {
-    private String[] coordArray; // will split coords into an array to handle
-                                 // each coord set to build the KML
+    private String[] coordArray;; // will split coords into an ArrayList to handle
+                                                             // each set of coords to build the KML
 
     public BuildKML(String coordList){
         // constructor splits coord list into an array
-        // and intiliazes necessary variables
+        // and initializes necessary variables
+        coordArray = coordList.split(",", -1);
+
+
+
+
     }
 
     public void buildFile(){
