@@ -34,7 +34,7 @@ public class FormatCoordinates {
         double degrees, minutes, seconds;
         String coordSplit[];
 
-        //37°47'27.1"N 122°24'20.2"W
+        //degreeCoords is passed in a format similar to 37°47'27.1"N
 
         degreeCoords = degreeCoords.replace('°', ' ');
         degreeCoords = degreeCoords.replace('\'', ' ');
@@ -42,33 +42,10 @@ public class FormatCoordinates {
 
         coordSplit = degreeCoords.split("\\s+"); //splits whitespace &/or consecutive whitespace
 
-        return 0;
+        degrees = Double.parseDouble(coordSplit[0]);
+        minutes = Double.parseDouble(coordSplit[1]);
+        seconds = Double.parseDouble(coordSplit[2]);
+
+        return degrees+minutes+seconds;
     }
 }
-
-
-/*
-
-Function Convert_Decimal(Degree_Deg As String) As Double
-
-    Dim degrees As Double
-    Dim minutes As Double
-    Dim seconds As Double
-
-    ' Set degree to value before degree symbol of Argument Passed.
-    degrees = Val(Left(Degree_Deg, InStr(1, Degree_Deg, ChrW(&HB0)) - 1))
-
-    ' Set minutes to the value between the degree symbol and the apostrophe
-    ' then is divided by 60. The Val function converts the text string to a number.
-    minutes = Val(Mid(Degree_Deg, InStr(1, Degree_Deg, ChrW(&HB0)) + 1, InStr(1, Degree_Deg, "'") - InStr(1, Degree_Deg, ChrW(&HB0)) - 1)) / 60
-
-    ' Set seconds to the number to the right of the apostrophe that is
-    ' converted to a value and then divided by 3600.
-    seconds = Val(Mid(Degree_Deg, InStr(1, Degree_Deg, "'") + 1, Len(Degree_Deg) - InStr(1, Degree_Deg, "'") - 2)) / 3600
-
-    'adds the 3 values together to get the total for the decimal coordinate
-    Convert_Decimal = degrees + minutes + seconds
-
-End Function
-
- */
