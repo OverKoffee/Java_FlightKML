@@ -46,6 +46,10 @@ public class FormatCoordinates {
         minutes = Double.parseDouble(coordSplit[1]);
         seconds = Double.parseDouble(coordSplit[2]);
 
-        return degrees+minutes+seconds;
+        if (coordSplit[7].equals("W") || coordSplit[7].equals("S")){
+            return -1 * degrees+minutes+seconds;
+        } else {
+            return degrees + minutes + seconds;
+        }
     }
 }
