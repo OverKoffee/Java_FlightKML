@@ -3,6 +3,10 @@ Class updated by Redmal on 3/2/2019.
 
 This class will format coordinates from DMS to decimal
 or decimal to DMS.
+
+Will be testing conversion with coords of Dragon Gate in San Francisco:
+    37°47'27.1"N 122°24'20.2"W
+    37.790865, -122.405608
  */
 
 public class FormatCoordinates {
@@ -24,6 +28,21 @@ public class FormatCoordinates {
 
     private double getFlightTime(double fltDistance, double acSpeed){
         return (fltDistance / acSpeed) * 3600;  //distance multiplied by km/s
+    }
+
+    private double toDecimalFormat(String degreeCoords){
+        double degrees, minutes, seconds;
+        String coordSplit[];
+
+        //37°47'27.1"N 122°24'20.2"W
+
+        degreeCoords = degreeCoords.replace('°', ' ');
+        degreeCoords = degreeCoords.replace('\'', ' ');
+        degreeCoords = degreeCoords.replace('\"', ' ');
+
+        coordSplit = degreeCoords.split("\\s+"); //splits whitespace &/or consecutive whitespace
+
+        return 0;
     }
 }
 
