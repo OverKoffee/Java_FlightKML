@@ -1,74 +1,34 @@
 /*
-Class updated by Redmal on 2/23/2019.
+Class updated by Redmal on 3/2/2019.
 
 This class will format coordinates from DMS to decimal
 or decimal to DMS.
  */
 
 public class FormatCoordinates {
-    private final double PI = 3.14159265358979;
-    private final double PI_half = 1.5707963267949;
-
-
 
     private double Haversine(double longitude1, double longitude2, double latitude1, double latitude2){
-        double dbl_dLat, dbl_dLon, dbl_a, dbl_P;
+        double dbl_dLat, dbl_dLon, dbl_a, dbl_Distance_KM;
 
-        dbl_P = PI/180;
-        dbl_dLat = dbl_P * (latitude2 - latitude1);   //convert to radians
-        dbl_dLon = dbl_P * (longitude2 - longitude1); //convert to radians
+        dbl_dLat = Math.toRadians (latitude2 - latitude1);   //convert to radians
+        dbl_dLon = Math.toRadians (longitude2 - longitude1); //convert to radians
 
         dbl_a = Math.sin(dbl_dLat / 2) * Math.sin(dbl_dLat / 2) +
-                    Math.cos(latitude1 * dbl_P) * Math.cos(latitude2 * dbl_P) *
+                    Math.cos(Math.toRadians(latitude1)) * Math.cos(Math.toRadians(latitude2)) *
                             Math.sin(dbl_dLon / 2) * Math.sin(dbl_dLon / 2);
-        return 0;
+
+        dbl_Distance_KM = 6371 * (2 * Math.atan2(Math.sqrt(1 - dbl_a), Math.sqrt(dbl_a)));
+
+        return dbl_Distance_KM;
+    }
+
+    private double getFlightTime(double fltDistance, double acSpeed){
+        return (fltDistance / acSpeed) * 3600;  //distance multiplied by km/s
     }
 }
+
+
 /*
-Function Haversine(dbl_Longitude1 As Double, dbl_Longitude2 As Double, dbl_Latitude1 As Double, dbl_Latitude2 As Double)
-
-    'coords are in decimal unit format when they this function is called
-
-    Dim dbl_dLat As Double
-    Dim dbl_dLon As Double
-    Dim dbl_a As Double
-    Dim dbl_P As Double
-
-
-
-    dbl_P = PI / 180
-    dbl_dLat = dbl_P * (dbl_Latitude2 - dbl_Latitude1)      'to radians
-    dbl_dLon = dbl_P * (dbl_Longitude2 - dbl_Longitude1)    'to radians
-
-    dbl_a = Sin(dbl_dLat / 2) * Sin(dbl_dLat / 2) + _
-            Cos(dbl_Latitude1 * dbl_P) * Cos(dbl_Latitude2 * dbl_P) * Sin(dbl_dLon / 2) * Sin(dbl_dLon / 2)
-
-    Dim c As Double
-    Dim dbl_Distance_KM As Double
-    c = 2 * ArcTan2(Sqr(1 - dbl_a), Sqr(dbl_a))
-
-    dbl_Distance_KM = 6371 * c
-
-    'calcs in KM for now
-    Haversine = dbl_Distance_KM
-
-    'will convert to knots later
-
-End Function
-
-Function ArcTan2(X As Double, Y As Double) As Double
-
-    Select Case X
-        Case Is > 0
-            ArcTan2 = Atn(Y / X)
-        Case Is < 0
-            ArcTan2 = Atn(Y / X) + PI * Sgn(Y)
-            If Y = 0 Then ArcTan2 = ArcTan2 + PI
-        Case Is = 0
-            ArcTan2 = PI_2 * Sgn(Y)
-    End Select
-
-End Function
 
 Function Convert_Decimal(Degree_Deg As String) As Double
 
@@ -92,8 +52,4 @@ Function Convert_Decimal(Degree_Deg As String) As Double
 
 End Function
 
-Function getFlightTime(fltDistance As Double, acSpeed As Double) As Double
-    getFlightTime = ((fltDistance) / (acSpeed)) * 3600 ' distance times km/s
-
-End Function
  */
