@@ -58,11 +58,10 @@ public class BuildKML extends FormatCoordinates {
         writer.write("            <tessellate>1</tessellate>");
         writer.write("            <coordinates>");
 
-        writer.write(toDecimalFormat(coordArray[1]) + "," + toDecimalFormat(coordArray[0]) + ",0"); // initiating first line of coords, first set
+        writer.write(toDecimalFormat(coordArray[0]) + ",0"); // initiating second line of coords, first set
 
-        for (int i = 2; i < coordArray.length; i++){
-            writer.write(toDecimalFormat(coordArray[i]) + "," + toDecimalFormat(coordArray[i+1]) + ",0");
-            i += 1;
+        for (int i = 1; i < coordArray.length; i++){
+            writer.write(toDecimalFormat(coordArray[i]) + ",0 ");
         }
 
         writer.write("        </coordinates>");

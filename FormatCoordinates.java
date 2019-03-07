@@ -30,12 +30,16 @@ public class FormatCoordinates {
         return (fltDistance / acSpeed) * 3600;  //distance multiplied by km/s
     }
 
-    public double toDecimalFormat(String degreeCoords){
+    public String toDecimalFormat(String degreeCoords){
         double degrees, minutes, seconds;
+        double degrees2, minutes2, seconds2;
+        double decimalTotal;
+        double decimalTotal2;
 
         String coordSplit[];
 
-        //degreeCoords is passed in a format similar to 37°47'27.1"N
+        //degreeCoords is passed in a format similar to 37° 47' 27.1" N
+        //                                              [0] [1] [2]  [3]
 
         degreeCoords = degreeCoords.replace('°', ' ');
         degreeCoords = degreeCoords.replace('\'', ' ');
@@ -43,14 +47,29 @@ public class FormatCoordinates {
 
         coordSplit = degreeCoords.split("\\s+"); //splits whitespace &/or consecutive whitespace
 
+        // set values from DMS format to add up for decimal format
+        // North/South coord
         degrees = Double.valueOf(coordSplit[0]);
         minutes = Double.valueOf(coordSplit[1]);
         seconds = Double.valueOf(coordSplit[2]);
 
-        if (coordSplit[7].equals("W") || coordSplit[7].equals("S")){
-            return -1 * degrees+minutes+seconds;
+        // East/West coord
+        degrees2 = Double.parseDouble(coordSplit[4]);
+        minutes2 = Double.parseDouble(coordSplit[5]);
+        seconds2 = Double.parseDouble(coordSplit[6]);
+
+        if (coordSplit[3].equals("S")){
+            decimalTotal = -1 * (degrees + minutes + seconds);
         } else {
-            return degrees + minutes + seconds;
+            decimalTotal = degrees + minutes + seconds;
         }
+
+        if (coordSplit[7].equals("W")){
+            decimalTotal2 = -1 * (degrees2 + minutes2 + seconds2);
+        } else {
+            decimalTotal2 = degrees2 + minutes2 + seconds2;
+        }
+
+        return decimalTotal2 + "," + decimalTotal;
     }
 }
