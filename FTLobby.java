@@ -1,15 +1,22 @@
+/*
+
+Class updated by Redmal on 3/6/2019.
+
+ */
+
 import javax.swing.*;
 import java.awt.*;
 
 public class FTLobby {
     private JFrame frame;
     private JTextField coords_A = new TextPrompt<JTextField>("Enter first " +
-            "coords...", new JTextField("")).getTextPrompt();
+                                                        "coords...", new JTextField("")).getTextPrompt();
     private JTextField coords_B = new TextPrompt<JTextField>("Enter second " +
                                                         "coords...", new JTextField("")).getTextPrompt();
     private JTextArea aircraftCoords = new TextPrompt<JTextArea>("Enter list " +
                                                         "list of coords...", new JTextArea("")).getTextPrompt();
     private JButton btn_GetKML = new JButton("Get KML");
+    private BuildKML buildKML;
 
     public FTLobby(){
         frame = new JFrame("Flight Tracker");
@@ -47,8 +54,7 @@ public class FTLobby {
         // button to create and access a built KML file
         btn_GetKML.setPreferredSize(new Dimension(342, 40));
         btn_GetKML.addActionListener(e -> {
-            System.out.println("We'll convert coords using FormatCoordinates class, then build KML " +
-                                "via the BuildKML class.");
+            buildKML = new BuildKML(aircraftCoords.getText());
         });
     }
 }
