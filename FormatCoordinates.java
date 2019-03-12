@@ -1,5 +1,5 @@
 /*
-Class updated by Redmal on 3/6/2019.
+Class updated by Redmal on 3/11/2019.
 
 This class will format coordinates from DMS to decimal
 or decimal to DMS.
@@ -31,8 +31,6 @@ public class FormatCoordinates {
     }
 
     public String toDecimalFormat(String degreeCoords){
-        double degrees, minutes, seconds;
-        double degrees2, minutes2, seconds2;
         double decimalTotal;
         double decimalTotal2;
 
@@ -40,7 +38,6 @@ public class FormatCoordinates {
 
         //degreeCoords is passed in a format similar to 37° 47' 27.1" N
         //                                              [0] [1] [2]  [3]
-
         degreeCoords = degreeCoords.replace('°', ' ');
         degreeCoords = degreeCoords.replace('\'', ' ');
         degreeCoords = degreeCoords.replace('\"', ' ');
@@ -49,25 +46,17 @@ public class FormatCoordinates {
 
         // set values from DMS format to add up for decimal format
         // North/South coord
-        degrees = Double.valueOf(coordSplit[0]);
-        minutes = Double.valueOf(coordSplit[1]);
-        seconds = Double.valueOf(coordSplit[2]);
+        decimalTotal = Double.valueOf(coordSplit[0]) + Double.valueOf(coordSplit[1]) + Double.valueOf(coordSplit[2]);
 
         // East/West coord
-        degrees2 = Double.parseDouble(coordSplit[4]);
-        minutes2 = Double.parseDouble(coordSplit[5]);
-        seconds2 = Double.parseDouble(coordSplit[6]);
+        decimalTotal2 = Double.valueOf(coordSplit[4]) + Double.valueOf(coordSplit[5]) + Double.valueOf(coordSplit[6]);
 
         if (coordSplit[3].equals("S")){
-            decimalTotal = -1 * (degrees + minutes + seconds);
-        } else {
-            decimalTotal = degrees + minutes + seconds;
+            decimalTotal = -1 * decimalTotal;
         }
 
         if (coordSplit[7].equals("W")){
-            decimalTotal2 = -1 * (degrees2 + minutes2 + seconds2);
-        } else {
-            decimalTotal2 = degrees2 + minutes2 + seconds2;
+            decimalTotal2 = -1 * decimalTotal2;
         }
 
         return decimalTotal2 + "," + decimalTotal;
